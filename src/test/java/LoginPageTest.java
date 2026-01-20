@@ -14,6 +14,8 @@ public class LoginPageTest extends BaseTest {
 		login.enterUsername("suyashpatil01@gmail.com");
 		login.enterPassword("Suyash@001");
 		login.submitButton();
+		
+		System.out.println("Suyash");
 
 	}
 
