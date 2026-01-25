@@ -2,7 +2,6 @@ package test;
 
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import Utilities.ExcelUtils;  // <-- Make sure this package matches your ExcelUtils class
@@ -49,8 +48,7 @@ class LoginPageTest extends BaseTest {
     }
 
     // Use DataProvider
-    @Test(dataProvider = "LoginData" , invocationCount = 3, threadPoolSize = 3)
-    @Parameters("browser")
+    @Test(dataProvider = "LoginData")
     
     public void testValidData(String username, String password) {
         LoginpageSp login = new LoginpageSp(driver);
