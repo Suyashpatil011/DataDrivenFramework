@@ -3,25 +3,51 @@ package base;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Parameters;
+
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+
+import Utilities.ExtendReportManager;
 
 public class BaseTest {
+
+
+
+	public WebDriver driver;
+	protected static ExtentReports extent;
 	
-	protected WebDriver driver;
-	
-	@BeforeMethod
+
+	@BeforeSuite
+	public void setupReport() {
+		extent = ExtendReportManager.getReportInstance();
+	}
+
+	@AfterSuite
+	public void flushReport() {
+		extent.flush();
+	}
+
+	@Parameters("browser")
+	@BeforeMethod(alwaysRun = true)
+
 	public void setUp() {
-		
+
 		driver = new ChromeDriver();
 		driver.get("https://admin-demo.nopcommerce.com/login");
 		driver.manage().window().maximize();
 	}
 
-	@AfterMethod
+	@AfterMethod(alwaysRun = true)
 	public void tearDown() {
-		if(driver != null) {
-			driver.quit();
-			
+		{
+			if (driver != null) {
+				driver.quit();
+
+			}
 		}
 	}
 }
