@@ -1,3 +1,4 @@
+
 package pagesp;
 
 import org.openqa.selenium.WebDriver;
@@ -6,63 +7,65 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class ProductCatalog {
-	private WebDriver driver;
 
-	@FindBy(xpath = "//a[normalize-space()='Catalog']")
-	WebElement catalogMenu;
+    private WebDriver driver;
 
-	@FindBy(xpath = "//a[normalize-space()='Products']")
-	WebElement productLink;
+    @FindBy(xpath ="(//a[@class='nav-link active'][1])[1]")
+    public WebElement catalogMenu;
 
-	@FindBy(id = "Name")
-	WebElement productName;
+    @FindBy(xpath = "//p[normalize-space()='Products']/parent::a")
+    public WebElement productsMenu;
 
-	@FindBy(id = "ShortDescription")
-	WebElement shortDescription;
+    @FindBy(id = "Name")
+    WebElement productName;
 
-	@FindBy(id = "Price")
-	WebElement priceText;
+    @FindBy(id = "ShortDescription")
+    WebElement shortDescription;
 
-	@FindBy(id = "OldPrice")
-	WebElement oldPriceText;
+    @FindBy(id = "Price")
+    WebElement priceText;
 
-	@FindBy(id = "ProductCost")
-	WebElement productCost;
+    @FindBy(id = "OldPrice")
+    WebElement oldPriceText;
 
-	@FindBy(xpath = "//button[@name='save']")
-	WebElement saveButton;
+    @FindBy(id = "ProductCost")
+    WebElement productCost;
 
-	public ProductCatalog(WebDriver driver) {
-		this.driver = driver;
-		PageFactory.initElements(driver, this);
+    @FindBy(xpath = "//button[@name='save']")
+    WebElement saveButton;
 
-	}
+    public ProductCatalog(WebDriver driver) {
+        this.driver = driver;
+        PageFactory.initElements(driver, this);
+    }
 
-	public void productLinks() {
-		catalogMenu.click();
-		productLink.click();
-	}
+    public void clickCatalog() {
+        catalogMenu.click();
+    }
 
-	public void enterProductName(String Productname, String Productdescription) {
-		productName.clear();
-		productName.sendKeys(Productname);
-		shortDescription.clear();
-		shortDescription.sendKeys(Productdescription);
-	}
+    public void clickProducts() {
+        productsMenu.click();
+    }
 
-	public void productDetails(int Price, int Oldprice, int ProductCost) {
-		priceText.clear();
-		priceText.sendKeys(String.valueOf(Price));
+    public void enterProductName(String productname, String productdescription) {
+        productName.clear();
+        productName.sendKeys(productname);
+        shortDescription.clear();
+        shortDescription.sendKeys(productdescription);
+    }
 
-		oldPriceText.clear();
-		oldPriceText.sendKeys(String.valueOf(Oldprice));
+    public void productDetails(int Price, int OldPrice, int ProductCost) {
+        priceText.clear();
+        priceText.sendKeys(String.valueOf(Price));
 
-		productCost.clear();
-		productCost.sendKeys(String.valueOf(ProductCost));
-	}
+        oldPriceText.clear();
+        oldPriceText.sendKeys(String.valueOf(OldPrice));
 
-	public void clickSave() {
-		saveButton.click();
-	}
+        productCost.clear();
+        productCost.sendKeys(String.valueOf(ProductCost));
+    }
 
+    public void clickSave() {
+        saveButton.click();
+    }
 }

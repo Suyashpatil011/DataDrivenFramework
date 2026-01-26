@@ -14,6 +14,8 @@ import com.aventstack.extentreports.ExtentTest;
 
 import Utilities.ExtendReportManager;
 import Utilities.Log;
+import io.github.bonigarcia.wdm.WebDriverManager;
+import pagesp.LoginpageSp;
 
 public class BaseTest {
 
@@ -35,13 +37,21 @@ public class BaseTest {
 
 	public void setUp() {
 		Log.info("Staring Script");
+		WebDriverManager.chromedriver().setup();
 		driver = new ChromeDriver();
 		driver.get("https://admin-demo.nopcommerce.com/login");
 		Log.info("Launching URL...");
 		driver.manage().window().maximize();
+
+		LoginpageSp login = new LoginpageSp(driver);
+		login.clearUsingJS();
+		login.enterUsername("admin@yourstore.com");
+		login.enterPassword("admin");
+		login.submitButton();
+
 	}
 
-	@AfterMethod(alwaysRun = true)
+	
 	public void tearDown() {
 		{
 			if (driver != null) {

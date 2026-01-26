@@ -1,0 +1,16 @@
+
+<suite name="Suite">
+
+  <test name="Login">
+     <classes>
+        <class name="test.LoginPageTest"/>
+     </classes>
+  </test>
+
+  <test name="ProductCatalog">
+     <classes>
+        <class name="test.ProductCatalogTest"/>
+     </classes>
+  </test>
+
+</suite>

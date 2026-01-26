@@ -1,5 +1,6 @@
 package pagesp;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -15,7 +16,7 @@ public class LoginpageSp {
 	@FindBy(id ="Password")
 	WebElement textPassword;
 	
-	@FindBy(xpath="//button")
+	@FindBy(xpath="//button[@type='submit']")
 	WebElement submitButton; 
 	
 	public LoginpageSp(WebDriver driver) {
@@ -23,9 +24,14 @@ public class LoginpageSp {
 		PageFactory.initElements(driver,this);
 		
 	}
+	public void clearUsingJS() {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("document.getElementById('Email').value='';");
+		js.executeScript("document.getElementById('Password').value='';");
+	}
 	
 	public void enterUsername(String username) {
-		textUserName.clear();
+		textUserName.clear();	
 		textUserName.sendKeys(username);
 			
 	}
